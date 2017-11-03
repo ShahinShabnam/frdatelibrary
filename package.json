@@ -1,0 +1,29 @@
+{
+  "name": "frdatelibrary",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShahinShabnam/frdatelibrary.git"
+  },
+  "author": {
+    "name": "ShahinShabnam",
+    "email": "shabnam.shahin@rancelab.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShahinShabnam/frdatelibrary.git/issues"
+  },
+  "main": "frdatelibrary.umd.js",
+  "module": "frdatelibrary.js",
+  "jsnext:main": "frdatelibrary.js",
+  "typings": "frdatelibrary.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+  
+}
