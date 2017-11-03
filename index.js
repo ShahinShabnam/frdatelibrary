@@ -535,7 +535,7 @@ var FrDatemodule = (function () {
     FrDatemodule.forRoot = function () {
         return {
             ngModule: FrDatemodule,
-            providers: [FrDateService]
+            providers: [DatePipe, FrDateService]
         };
     };
     return FrDatemodule;
