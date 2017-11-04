@@ -553,7 +553,6 @@ FrDatemodule.decorators = [
                 imports: [
                     CommonModule,
                     FormsModule,
-                    DatePipe,
                     DxCalendarModule,
                     DxTemplateModule
                 ],
@@ -564,8 +563,8 @@ FrDatemodule.decorators = [
                 exports: [
                     FrDateLibraryComponent,
                     FrDateComponent,
-                    DatePipe
-                ]
+                ],
+                providers: [DatePipe]
             },] },
 ];
 /**
