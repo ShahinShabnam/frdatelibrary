@@ -544,7 +544,7 @@ var FrDatemodule = (function () {
     FrDatemodule.forRoot = function () {
         return {
             ngModule: FrDatemodule,
-            providers: [common.DatePipe, FrDateService]
+            providers: [FrDateService]
         };
     };
     return FrDatemodule;
@@ -559,11 +559,13 @@ FrDatemodule.decorators = [
                 ],
                 declarations: [
                     FrDateLibraryComponent,
-                    FrDateComponent
+                    FrDateComponent,
+                    common.DatePipe
                 ],
                 exports: [
                     FrDateLibraryComponent,
-                    FrDateComponent
+                    FrDateComponent,
+                    common.DatePipe
                 ]
             },] },
 ];
