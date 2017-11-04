@@ -553,13 +553,13 @@ FrDatemodule.decorators = [
                 imports: [
                     CommonModule,
                     FormsModule,
+                    DatePipe,
                     DxCalendarModule,
                     DxTemplateModule
                 ],
                 declarations: [
                     FrDateLibraryComponent,
                     FrDateComponent,
-                    DatePipe
                 ],
                 exports: [
                     FrDateLibraryComponent,
