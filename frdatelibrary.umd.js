@@ -31,6 +31,7 @@ var FrDateService = (function () {
             minYear2Y: 1,
             maxYear2Y: 78
         };
+        this.dateDialogType = 'date';
     }
     /**
      * @param {?} dataString
@@ -307,6 +308,13 @@ var FrDateService = (function () {
         dateString = dateString.replace(/[./-]/g, this.dateValidate.dateSeparator.toString()); //replace date seperator
         return dateString;
     };
+    /**
+     * @param {?} type
+     * @return {?}
+     */
+    FrDateService.prototype.getDialogType = function (type) {
+        this.dateDialogType = type;
+    };
     return FrDateService;
 }());
 FrDateService.decorators = [
@@ -327,7 +335,7 @@ var FrDateComponent = (function () {
         this.frDateService = frDateService;
         this.zIndexDialog = 1000;
         this.cellTemplate = 'custom'; //accept two values cell/custom, cell for apply predefine color and custom for user define color
-        this.dateDialogType = 'date';
+        // dateDialogType: string = 'date';
         this.selectedDateCalender = new Date(); //selected date for calender
         this.dateValidate = {
             dateFormat: '',
@@ -340,7 +348,7 @@ var FrDateComponent = (function () {
         this.frDateService.dateValidate.dateFormat = ('yy' + this.frDateService.dateValidate.dateSeparator + 'MM' + this.frDateService.dateValidate.dateSeparator + 'dd').replace('yy', 'yyyy');
         this.frDateService.dateValidate.dateFormat = ('MM' + this.frDateService.dateValidate.dateSeparator + 'dd' + this.frDateService.dateValidate.dateSeparator + 'yy').replace('yy', 'yyyy');
         this.frDateService.dateValidate.dateFormat = ('dd' + this.frDateService.dateValidate.dateSeparator + 'MM' + this.frDateService.dateValidate.dateSeparator + 'yy').replace('yy', 'yyyy');
-        this.dateDialogType = 'dateRange'; //Date to Date Range
+        // this.dateDialogType = 'dateRange';//Date to Date Range
         this.isVisible = true;
         this.onValueChangedDate();
     }
@@ -373,7 +381,7 @@ var FrDateComponent = (function () {
      * @return {?}
      */
     FrDateComponent.prototype.ngAfterViewInit = function () {
-        switch (this.dateDialogType) {
+        switch (this.frDateService.dateDialogType) {
             case 'date':
                 document.getElementById('date').focus();
                 break;
@@ -514,8 +522,8 @@ var FrDateComponent = (function () {
 FrDateComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'app-fr-date',
-                template: "<head> <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn3.devexpress.com/jslib/17.1.6/css/dx.common.css\" /> <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn3.devexpress.com/jslib/17.1.6/css/dx.light.css\" /> </head> <body> <div [style.z-index]=\"zIndexDialog\" *ngIf=\"isVisible\" class=\"dialog\"> <div *ngIf=\"dateDialogType == 'date'\"> <div class=\"dialog-heading\">Enter Date</div> <div> <div style=\"margin-top: 10px;\"> <span class=\"date-label\">Date :</span> <input id=\"date\" style=\"width: 100px;\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='date'\" [(ngModel)]=\"selectedDateTextbox\" required> <button (click)=\"openDxCalender('date')\">...</button> </div> </div> </div> <div *ngIf=\"dateDialogType == 'dateRange'\"> <div class=\"dialog-heading\">Date Range</div> <div style=\"margin-top: 10px;\"> <span class=\"date-label\">From :</span> <input style=\"width: 100px;\" id=\"selectedDateTextboxFrom\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='dateFrom'\" [(ngModel)]=\"selectedDateTextboxFrom\" required> <button (click)=\"openDxCalender('dateFrom')\">...</button> </div> <div style=\"margin-top: 10px;\"> <span class=\"to-label\">To :</span> <input style=\"width: 100px;\" id=\"selectedDateTextboxTo\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='dateTo'\" [(ngModel)]=\"selectedDateTextboxTo\" required> <button (click)=\"openDxCalender('dateTo')\">...</button> </div> </div> <div class=\"btn-group\"> <button class=\"btn\" (click)=\"dialogOk()\">Ok</button> <button class=\"btn\" (click)=\"closeDateDialog()\">Exit</button> </div> </div> <div class=\"calender-container-date\" *ngIf=\"isDxCalenderVisible\"> <dx-calendar id=\"calender-container-date\" [firstDayOfWeek]=\"this.dateValidate.weekStartDate\" [(value)]=\"selectedDateCalender\" [cellTemplate]=\"cellTemplate\" showTodayButton=\"true\" visible=\"true\" (onValueChanged)=\"onValueChangedDate()\"> <span *dxTemplate=\"let cell of 'custom'\" [style.color]=\"getCellCssClass(cell.date)\"> {{cell.text}} </span> </dx-calendar> <div class=\"close-dx-calender\" (click)=\"closeDxCalender()\"> <span>Cancel</span> </div> </div> <div *ngIf=\"isVisible\" class=\"overlay\"></div> </body>",
-                styles: [".dialog { /* z-index: 1000; */ position: fixed; left: 42%; top: 40%; height: 140px; width: 200px; background-color: #B9B9B9; padding: 12px; } .overlay { position: fixed; top: 0; bottom: 0; left: 0; right: 0; /* background-color: rgba(0, 0, 0, 0.5); */ z-index: 999; } .btn{ cursor: pointer; height: 38px; width: 98px; background-color: #6E6E6E; } .btn-group{ position: absolute; bottom: 6px; left: 11px; } .calender-container-date { float: left; position: absolute; z-index: 1000;  left: calc(42% + 225px); top: 40%; } .dialog-heading{ font-weight: bold; text-decoration: underline; text-align: center; } .date-label{ float: left; padding: 0 16px 0px 0px; } .to-label{ float: left; padding: 0 34px 0px 0px; } .close-dx-calender{ text-align: center; background-color: dimgrey; cursor: pointer; }"],
+                template: "<head> <link rel=\"stylesheet\" type=\"text/css\" href=\"../node_modules/devextreme/dist/css/dx.common.css\" /> <link rel=\"stylesheet\" type=\"text/css\" href=\"../node_modules/devextreme/dist/css/dx.light.css\" /> </head> <body> <div [style.z-index]=\"zIndexDialog\" *ngIf=\"isVisible\" class=\"dialog\"> <div *ngIf=\"frDateService.dateDialogType == 'date'\"> <div class=\"dialog-heading\">Enter Date</div> <div> <div style=\"margin-top: 10px;\"> <span class=\"date-label\">Date :</span> <input id=\"date\" style=\"width: 100px;\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='date'\" [(ngModel)]=\"selectedDateTextbox\" required> <button class=\"open-dxcalender\" (click)=\"openDxCalender('date')\">---</button> </div> </div> </div> <div *ngIf=\"frDateService.dateDialogType == 'dateRange'\"> <div class=\"dialog-heading\">Date Range</div> <div style=\"margin-top: 10px;\"> <span class=\"date-label\">From :</span> <input style=\"width: 100px;\" id=\"selectedDateTextboxFrom\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='dateFrom'\" [(ngModel)]=\"selectedDateTextboxFrom\" required> <button class=\"open-dxcalender\" (click)=\"openDxCalender('dateFrom')\">---</button> </div> <div style=\"margin-top: 10px;\"> <span class=\"to-label\">To :</span> <input style=\"width: 100px;\" id=\"selectedDateTextboxTo\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='dateTo'\" [(ngModel)]=\"selectedDateTextboxTo\" required> <button class=\"open-dxcalender\" (click)=\"openDxCalender('dateTo')\">---</button> </div> </div> <div class=\"btn-group\"> <button class=\"btn\" (click)=\"dialogOk()\">Ok</button> <button class=\"btn\" (click)=\"closeDateDialog()\">Exit</button> </div> </div> <div class=\"calender-container-date\" *ngIf=\"isDxCalenderVisible\"> <dx-calendar id=\"calender-container-date\" [firstDayOfWeek]=\"this.dateValidate.weekStartDate\" [(value)]=\"selectedDateCalender\" [cellTemplate]=\"cellTemplate\" showTodayButton=\"true\" visible=\"true\" (onValueChanged)=\"onValueChangedDate()\"> <span *dxTemplate=\"let cell of 'custom'\" [style.color]=\"getCellCssClass(cell.date)\"> {{cell.text}} </span> </dx-calendar> <div class=\"close-dx-calender\" (click)=\"closeDxCalender()\"> <span>Cancel</span> </div> </div> <div *ngIf=\"isVisible\" class=\"overlay\"></div> </body>",
+                styles: [".dialog { /* z-index: 1000; */ position: fixed; left: 42%; top: 40%; height: 140px; width: 200px; background-color: #d3d3d3; padding: 12px; border: 1px solid #bfbfbf; } .overlay { position: fixed; top: 0; bottom: 0; left: 0; right: 0; /* background-color: rgba(0, 0, 0, 0.5); */ z-index: 999; } .btn{ cursor: pointer; height: 38px; width: 98px; background-color: #bfbfbf; font-size: larger; } .btn-group{ position: absolute; bottom: 6px; left: 11px; } .calender-container-date { float: left; position: absolute; z-index: 1000;  left: calc(42% + 225px); top: 40%; } .dialog-heading{ font-weight: bold; text-decoration: underline; text-align: center; } .date-label{ float: left; padding: 0 16px 0px 0px; } .to-label{ float: left; padding: 0 34px 0px 0px; } .close-dx-calender{ text-align: center; background-color: dimgrey; cursor: pointer; } .open-dxcalender{ background-color: transparent; border: 0px; font-size: small; }"],
                 host: { '(window:keyup)': 'windowKeyUp($event)' }
             },] },
 ];

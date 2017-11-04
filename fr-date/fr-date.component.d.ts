@@ -6,7 +6,6 @@ export declare class FrDateComponent implements OnInit, AfterViewInit {
     private frDateService;
     zIndexDialog: number;
     cellTemplate: string;
-    dateDialogType: string;
     selectedDateCalender: Date;
     selectedDateTextbox: any;
     selectedDateTextboxFrom: any;

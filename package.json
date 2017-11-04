@@ -26,10 +26,11 @@
     "zone.js": "^0.8.4"
   },
   "dependencies": {
-    "@angular/forms": "^5.0.0",
+    "@angular/forms": "4.4.5",
     "devextreme": "^17.1.7",
     "devextreme-angular": "^16.2.9",
     "@types/jquery": "2.0.34"
   }
+ 
   
 }
