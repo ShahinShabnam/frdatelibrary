@@ -418,7 +418,7 @@ var FrDateComponent = (function () {
     FrDateComponent.prototype.closeDateDialog = function () {
         alert("closeDateDialog");
         // this.frDateService.isVisible=false;
-        this.frDateService.emit('date:dislog:close');
+        this.frDateService.emit('date:dislog:close', false);
     };
     /**
      * @param {?} dxCalenderType
