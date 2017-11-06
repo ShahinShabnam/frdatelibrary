@@ -1,5 +1,6 @@
 export declare class FrDateService {
     dateValidate: any;
+    isVisible: boolean;
     focusOnTextBox: string;
     dateDialogType: string;
     constructor();
@@ -9,4 +10,5 @@ export declare class FrDateService {
     getYear(selectedDataTextboxArray: any): number;
     replaceDateSeperator(dateString: any): any;
     getDialogType(type: any): void;
+    dialogClose(value: any): void;
 }
