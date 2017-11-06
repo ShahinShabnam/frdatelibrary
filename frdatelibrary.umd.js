@@ -32,7 +32,7 @@ var FrDateService = (function () {
             maxYear2Y: 78
         };
         this.dateDialogType = 'date';
-        // this.isVisible = true;
+        this.isVisible = true;
     }
     /**
      * @param {?} dataString
@@ -354,7 +354,7 @@ var FrDateComponent = (function () {
         this.frDateService.dateValidate.dateFormat = ('MM' + this.frDateService.dateValidate.dateSeparator + 'dd' + this.frDateService.dateValidate.dateSeparator + 'yy').replace('yy', 'yyyy');
         this.frDateService.dateValidate.dateFormat = ('dd' + this.frDateService.dateValidate.dateSeparator + 'MM' + this.frDateService.dateValidate.dateSeparator + 'yy').replace('yy', 'yyyy');
         // this.dateDialogType = 'dateRange';//Date to Date Range
-        this.frDateService.isVisible = true;
+        // this.frDateService.isVisible = true;
         this.onValueChangedDate();
     }
     /**
