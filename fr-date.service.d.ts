@@ -10,5 +10,4 @@ export declare class FrDateService {
     getYear(selectedDataTextboxArray: any): number;
     replaceDateSeperator(dateString: any): any;
     getDialogType(type: any): void;
-    dialogClose(value: any): void;
 }

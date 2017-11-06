@@ -12,7 +12,6 @@ export declare class FrDateComponent implements OnInit, AfterViewInit {
     selectedDateTextboxTo: any;
     isDxCalenderVisible: boolean;
     focusOnTextBox: string;
-    isVisible: boolean;
     dateValidate: any;
     dxCalenderType: string;
     constructor(datePipe: DatePipe, frDateService: FrDateService);

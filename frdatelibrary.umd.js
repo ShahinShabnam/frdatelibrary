@@ -32,7 +32,7 @@ var FrDateService = (function () {
             maxYear2Y: 78
         };
         this.dateDialogType = 'date';
-        this.isVisible = true;
+        // this.isVisible = true;
     }
     /**
      * @param {?} dataString
@@ -316,15 +316,11 @@ var FrDateService = (function () {
     FrDateService.prototype.getDialogType = function (type) {
         this.dateDialogType = type;
     };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    FrDateService.prototype.dialogClose = function (value) {
-        this.isVisible = value;
-    };
     return FrDateService;
 }());
+// public dialogClose(value) {
+//   this.isVisible = value;
+// }
 FrDateService.decorators = [
     { type: core.Injectable },
 ];
@@ -345,6 +341,7 @@ var FrDateComponent = (function () {
         this.cellTemplate = 'custom'; //accept two values cell/custom, cell for apply predefine color and custom for user define color
         // dateDialogType: string = 'date';
         this.selectedDateCalender = new Date(); //selected date for calender
+        // isVisible: boolean; //temp variable, used for show/hide date dialog
         this.dateValidate = {
             dateFormat: '',
             dateSeparator: '-',
@@ -357,7 +354,7 @@ var FrDateComponent = (function () {
         this.frDateService.dateValidate.dateFormat = ('MM' + this.frDateService.dateValidate.dateSeparator + 'dd' + this.frDateService.dateValidate.dateSeparator + 'yy').replace('yy', 'yyyy');
         this.frDateService.dateValidate.dateFormat = ('dd' + this.frDateService.dateValidate.dateSeparator + 'MM' + this.frDateService.dateValidate.dateSeparator + 'yy').replace('yy', 'yyyy');
         // this.dateDialogType = 'dateRange';//Date to Date Range
-        // this.isVisible = true;
+        this.frDateService.isVisible = true;
         this.onValueChangedDate();
     }
     /**
@@ -405,14 +402,13 @@ var FrDateComponent = (function () {
      * @return {?}
      */
     FrDateComponent.prototype.closeDateDialog = function () {
-        alert("closeDateDialog");
-        this.frDateService.dialogClose(this.isVisible);
+        this.frDateService.isVisible = false;
     };
     /**
      * @return {?}
      */
     FrDateComponent.prototype.dialogOk = function () {
-        this.frDateService.dialogClose(this.isVisible);
+        this.frDateService.isVisible = false;
     };
     /**
      * @param {?} dxCalenderType
