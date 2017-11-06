@@ -1,6 +1,9 @@
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/filter';
+import { Subject } from 'rxjs/Subject';
 export declare class FrDateService {
     dateValidate: any;
-    isVisible: boolean;
+    subject: Subject<any>;
     focusOnTextBox: string;
     dateDialogType: string;
     constructor();
@@ -10,4 +13,6 @@ export declare class FrDateService {
     getYear(selectedDataTextboxArray: any): number;
     replaceDateSeperator(dateString: any): any;
     getDialogType(type: any): void;
+    filterOn(id: string): Observable<any>;
+    emit(id: string, options?: any): void;
 }

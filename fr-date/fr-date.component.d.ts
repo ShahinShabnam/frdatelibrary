@@ -19,7 +19,6 @@ export declare class FrDateComponent implements OnInit, AfterViewInit {
     private onValueChangedDate();
     ngAfterViewInit(): void;
     private closeDateDialog();
-    private dialogOk();
     private openDxCalender(dxCalenderType);
     private resetSelectedDateCalender(selectedTextbox);
     private closeDxCalender();
