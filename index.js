@@ -368,6 +368,8 @@ var FrDateComponent = (function () {
         this.frDateService.dateValidate.dateFormat = ('MM' + this.frDateService.dateValidate.dateSeparator + 'dd' + this.frDateService.dateValidate.dateSeparator + 'yy').replace('yy', 'yyyy');
         this.frDateService.dateValidate.dateFormat = ('dd' + this.frDateService.dateValidate.dateSeparator + 'MM' + this.frDateService.dateValidate.dateSeparator + 'yy').replace('yy', 'yyyy');
         // this.dateDialogType = 'dateRange';//Date to Date Range
+        this.predefinedRangeVisible = false;
+        this.predefinedListItem = ["Today", "Yesterday", "This Week(Mon-Today)", "This Week(Sun-Today)", "Last 7 Days", "Last Week(Sun-Sat)", "Last Week(Mon-Sun)", "Last Working Week(Mon-Fri)", "Last 14 days", "This Month", "Last 30 days", "Last Month"];
         this.onValueChangedDate();
     }
     /**
