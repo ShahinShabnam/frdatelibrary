@@ -14,6 +14,8 @@ export declare class FrDateComponent implements OnInit, AfterViewInit {
     focusOnTextBox: string;
     dateValidate: any;
     dxCalenderType: string;
+    predefinedRangeVisible: boolean;
+    predefinedListItem: any;
     constructor(datePipe: DatePipe, frDateService: FrDateService);
     ngOnInit(): void;
     private onValueChangedDate();
@@ -25,4 +27,7 @@ export declare class FrDateComponent implements OnInit, AfterViewInit {
     private closeDxCalender();
     private windowKeyUp(event);
     getCellCssClass(date: any): string;
+    preDefinedRangeDialogOpen(): void;
+    private predefinedListopen(event, newValue);
+    preDefinedDialogExit(): void;
 }

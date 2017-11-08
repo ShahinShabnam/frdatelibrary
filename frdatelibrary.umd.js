@@ -405,6 +405,9 @@ var FrDateComponent = (function () {
             case 'dateRange':
                 document.getElementById('selectedDateTextboxFrom').focus();
                 break;
+            case 'predefinedRange':
+                document.getElementById('selectedDateTextboxFrom').focus();
+                break;
             default:
                 break;
         }
@@ -534,13 +537,332 @@ var FrDateComponent = (function () {
         }
         return daycolor;
     };
+    /**
+     * @return {?}
+     */
+    FrDateComponent.prototype.preDefinedRangeDialogOpen = function () {
+        this.predefinedRangeVisible = true;
+        this.zIndexDialog = 999;
+    };
+    /**
+     * @param {?} event
+     * @param {?} newValue
+     * @return {?}
+     */
+    FrDateComponent.prototype.predefinedListopen = function (event, newValue) {
+        var /** @type {?} */ todaydate = new Date();
+        var /** @type {?} */ selectedItem;
+        console.log(this.selectedDateCalender.getDay() + "selectedDateCalender.getDay()");
+        selectedItem = newValue;
+        if (selectedItem == newValue) {
+            switch (selectedItem) {
+                case "Today":
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate());
+                    this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    break;
+                case "Yesterday":
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 1);
+                    this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 1);
+                    this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    break;
+                case "This Week(Mon-Today)":
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    switch (this.selectedDateCalender.getDay()) {
+                        case 1:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate());
+                            break;
+                        case 2:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 1);
+                            break;
+                        case 3:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 2);
+                            break;
+                        case 4:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 3);
+                            break;
+                        case 5:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 4);
+                            break;
+                        case 6:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 5);
+                            break;
+                        case 0:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 6);
+                            break;
+                        default:
+                            break;
+                    }
+                    this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    break;
+                case "This Week(Sun-Today)":
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    switch (this.selectedDateCalender.getDay()) {
+                        case 1:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 1);
+                            break;
+                        case 2:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 2);
+                            break;
+                        case 3:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 3);
+                            break;
+                        case 4:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 4);
+                            break;
+                        case 5:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 5);
+                            break;
+                        case 6:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 6);
+                            break;
+                        case 0:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate());
+                            break;
+                        default:
+                            break;
+                    }
+                    this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    break;
+                case "Last 7 Days":
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 6);
+                    this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate());
+                    this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    break;
+                case "Last Week(Sun-Sat)":
+                    this.selectedDateCalender = new Date();
+                    switch (this.selectedDateCalender.getDay()) {
+                        case 1:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 2);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 8);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 2:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 3);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 9);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 3:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 4);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 10);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 4:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 5);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 11);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 5:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 6);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 12);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 6:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 7);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 13);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 0:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 1);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 7);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case "Last Week(Mon-Sun)":
+                    this.selectedDateCalender = new Date();
+                    switch (this.selectedDateCalender.getDay()) {
+                        case 1:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 1);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 7);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 2:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 2);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 8);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 3:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 3);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 9);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 4:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 4);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 10);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 5:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 5);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 11);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 6:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 6);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 12);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 0:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 7);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 13);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case "Last Working Week(Mon-Fri)":
+                    this.selectedDateCalender = new Date();
+                    switch (this.selectedDateCalender.getDay()) {
+                        case 1:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 3);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 7);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 2:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 4);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 8);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 3:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 5);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 9);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 4:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 6);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 10);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 5:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 7);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 11);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 6:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 8);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 12);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        case 0:
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 9);
+                            this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            this.selectedDateCalender = new Date();
+                            this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 13);
+                            this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case "Last 14 days":
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate() - 13);
+                    this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    // this.datethis.selectedDateCalender = this.datePipe.transform(this.selectedDateCalender,  this.frDateService.dateValidate.dateFormat);
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate());
+                    this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    break;
+                case "This Month":
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), 1);
+                    this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(todaydate.getFullYear(), todaydate.getMonth() + 1, 0);
+                    this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    break;
+                case "Last 30 days":
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), (this.selectedDateCalender.getDate() - 29));
+                    this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    // this.datethis.selectedDateCalender = this.datethis.selectedDateCalender;
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth(), this.selectedDateCalender.getDate());
+                    this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    // this.datethis.selectedDateCalender = this.datePipe.transform(this.selectedDateCalender,  this.frDateService.dateValidate.dateFormat);
+                    break;
+                case "Last Month":
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(this.selectedDateCalender.getFullYear(), this.selectedDateCalender.getMonth() - 1, 1);
+                    this.selectedDateTextboxFrom = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    this.selectedDateCalender = new Date();
+                    this.selectedDateCalender = new Date(todaydate.getFullYear(), todaydate.getMonth(), 0);
+                    this.selectedDateTextboxTo = this.datePipe.transform(this.selectedDateCalender, this.frDateService.dateValidate.dateFormat);
+                    break;
+                default:
+                    break;
+            }
+        }
+        // this.preDefinedDialogExit();
+        // this.dialogOk();
+    };
+    /**
+     * @return {?}
+     */
+    FrDateComponent.prototype.preDefinedDialogExit = function () {
+        this.zIndexDialog = 1000;
+        this.predefinedRangeVisible = false;
+    };
     return FrDateComponent;
 }());
 FrDateComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'app-fr-date',
-                template: "<head> <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn3.devexpress.com/jslib/17.1.6/css/dx.common.css\" /> <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn3.devexpress.com/jslib/17.1.6/css/dx.light.css\" /> </head> <body> <div [style.z-index]=\"zIndexDialog\" class=\"dialog\"> <div *ngIf=\"frDateService.dateDialogType == 'date'\" class=\"date-container\"> <div class=\"dialog-heading\">Enter Date</div> <div> <div style=\"margin-top: 10px;\"> <span class=\"date-label\">Date :</span> <input id=\"date\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='date'\" [(ngModel)]=\"selectedDateTextbox\" required> <button class=\"open-dxcalender\" (click)=\"openDxCalender('date')\">---</button> </div> </div> </div> <div *ngIf=\"frDateService.dateDialogType == 'dateRange'\" class=\"date-container\"> <div class=\"dialog-heading\">Date Range</div> <div style=\"margin-top: 6px;\"> <span class=\"from-label\">From :</span> <input id=\"selectedDateTextboxFrom\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='dateFrom'\" [(ngModel)]=\"selectedDateTextboxFrom\" required> <button class=\"open-dxcalender\" (click)=\"openDxCalender('dateFrom')\">---</button> </div> <div style=\"margin-top: 2px;\"> <span class=\"to-label\">To :</span> <input id=\"selectedDateTextboxTo\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='dateTo'\" [(ngModel)]=\"selectedDateTextboxTo\" required> <button class=\"open-dxcalender\" (click)=\"openDxCalender('dateTo')\">---</button> </div> </div> <div class=\"btn-group\"> <button class=\"btn\" (click)=\"dialogOk()\">Ok</button> <button class=\"btn\" (click)=\"closeDateDialog()\">Exit</button> </div> </div> <div class=\"calender-container-date\" *ngIf=\"isDxCalenderVisible\"> <dx-calendar id=\"calender-container-date\" [firstDayOfWeek]=\"this.dateValidate.weekStartDate\" [(value)]=\"selectedDateCalender\" [cellTemplate]=\"cellTemplate\" showTodayButton=\"true\" visible=\"true\" (onValueChanged)=\"onValueChangedDate()\"> <span *dxTemplate=\"let cell of 'custom'\" [style.color]=\"getCellCssClass(cell.date)\"> {{cell.text}} </span> </dx-calendar> <div class=\"close-dx-calender\" (click)=\"closeDxCalender()\"> <span>Cancel</span> </div> </div> <div class=\"overlay\"></div> </body>",
-                styles: [".dialog { /* z-index: 1000; */ position: fixed; left: 42%; top: 40%; height: 140px; width: 219px; background-color: #d3d3d3; /* padding: 12px; */ border: 1px solid #bfbfbf; } .overlay { position: fixed; top: 0; bottom: 0; left: 0; right: 0; /* background-color: rgba(0, 0, 0, 0.5); */ z-index: 999; } .btn{ cursor: pointer; height: 38px; width: 106px; background-color: #bfbfbf; font-size: larger; } .btn-group{ /* position: absolute; */ /* bottom: 2px; */ left: 1px; } .calender-container-date { float: left; position: absolute; z-index: 1000;  left: calc(42% + 225px); top: 40%; } .dialog-heading{ font-weight: bold; text-decoration: underline; text-align: center; padding-top: 15px; } .date-label{ float: left; padding: 0px 8px 0px 25px; } .from-label{ float: left; padding: 0px 12px 0px 15px; } .to-label{ float: left; padding: 0 30px 0px 15px; } .close-dx-calender{ text-align: center; background-color: dimgrey; cursor: pointer; } .open-dxcalender{ background-color: transparent; border: 0px; font-size: small; } input { background-color: transparent; border: 0px solid; height:20px; width: 90px; font-weight: bold; }  input:focus { background-color: black; color:white; font-weight: bold; } .date-container{ height:100px; }"],
+                template: "<head> <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn3.devexpress.com/jslib/17.1.6/css/dx.common.css\" /> <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn3.devexpress.com/jslib/17.1.6/css/dx.light.css\" /> </head> <body> <div [style.z-index]=\"zIndexDialog\" class=\"dialog\"> <div *ngIf=\"frDateService.dateDialogType == 'date'\" class=\"date-container\"> <div class=\"dialog-heading\">Enter Date</div> <div> <div style=\"margin-top: 10px;\"> <span class=\"date-label\">Date :</span> <input id=\"date\" type=\"text\"  (focus)=\"frDateService.focusOnTextBox='date'\" [(ngModel)]=\"selectedDateTextbox\" required> <button class=\"open-dxcalender\" (click)=\"openDxCalender('date')\">---</button> </div> </div> </div> <div *ngIf=\"frDateService.dateDialogType == 'dateRange'\" class=\"date-container\"> <div class=\"dialog-heading\">Date Range</div> <div style=\"margin-top: 6px;\"> <span class=\"from-label\">From :</span> <input id=\"selectedDateTextboxFrom\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='dateFrom'\" [(ngModel)]=\"selectedDateTextboxFrom\" required> <button class=\"open-dxcalender\" (click)=\"openDxCalender('dateFrom')\">---</button> </div> <div style=\"margin-top: 2px;\"> <span class=\"to-label\">To :</span> <input id=\"selectedDateTextboxTo\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='dateTo'\" [(ngModel)]=\"selectedDateTextboxTo\" required> <button class=\"open-dxcalender\" (click)=\"openDxCalender('dateTo')\">---</button> </div> </div> <div *ngIf=\"frDateService.dateDialogType == 'predefinedRange'\" class=\"date-container-predefined\"> <div class=\"dialog-heading\">Date Range</div> <div style=\"margin-top: 6px;\"> <span class=\"from-label\">From :</span> <input id=\"selectedDateTextboxFrom\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='dateFrom'\" [(ngModel)]=\"selectedDateTextboxFrom\" required> <button class=\"open-dxcalender\" (click)=\"openDxCalender('dateFrom')\">---</button> </div> <div style=\"margin-top: 2px;\"> <span class=\"to-label\">To :</span> <input id=\"selectedDateTextboxTo\" type=\"text\" (focus)=\"frDateService.focusOnTextBox='dateTo'\" [(ngModel)]=\"selectedDateTextboxTo\" required> <button class=\"open-dxcalender\" (click)=\"openDxCalender('dateTo')\">---</button> </div> <div style=\"text-align:center\"> <button class=\"button-pre-time\" (click)=\"preDefinedRangeDialogOpen()\">Predefined Range</button> </div> <div style=\"text-align:center\"> <button class=\"button-pre-time\" (click)=\"timeRangeDialogOpen()\">Time Range</button> </div> </div> <div class=\"btn-group\"> <button class=\"btn\" (click)=\"dialogOk()\">Ok</button> <button class=\"btn\" (click)=\"closeDateDialog()\">Exit</button> </div> </div> <!-- Calender Start --> <div class=\"calender-container-date\" *ngIf=\"isDxCalenderVisible\"> <dx-calendar id=\"calender-container-date\" [firstDayOfWeek]=\"this.dateValidate.weekStartDate\" [(value)]=\"selectedDateCalender\" [cellTemplate]=\"cellTemplate\" showTodayButton=\"true\" visible=\"true\" (onValueChanged)=\"onValueChangedDate()\"> <span *dxTemplate=\"let cell of 'custom'\" [style.color]=\"getCellCssClass(cell.date)\"> {{cell.text}} </span> </dx-calendar> <div class=\"close-dx-calender\" (click)=\"closeDxCalender()\"> <span>Cancel</span> </div> </div> <!-- Calender End --> <!-- Predefined List Start --> <div *ngIf=\"predefinedRangeVisible\" class=\"predefined-list-container\"> <ul> <h4 style=\"text-decoration: underline\">Predefined Range</h4> <li *ngFor=\"let item of predefinedListItem\" (click)=\"predefinedListopen($event, item)\" style=\"cursor: pointer;\">{{item}}</li> </ul> <button class=\"button-predefined-cancel\" (click)=\"preDefinedDialogExit()\">Cancel</button> </div> <!-- Predefined List End --> <div class=\"overlay\"></div> </body>",
+                styles: [".dialog { /* z-index: 1000; */ position: fixed; left: 42%; top: 40%; height: 180px; width: 219px; background-color: #d3d3d3; /* padding: 12px; */ border: 1px solid #bfbfbf; } .overlay { position: fixed; top: 0; bottom: 0; left: 0; right: 0; /* background-color: rgba(0, 0, 0, 0.5); */ z-index: 999; } .btn{ cursor: pointer; height: 38px; width: 106px; background-color: #bfbfbf; font-size: larger; } .btn-group{ /* position: absolute; */ /* bottom: 2px; */ left: 1px; } .calender-container-date { float: left; position: absolute; z-index: 1000;  left: calc(42% + 225px); top: 40%; } .dialog-heading{ font-weight: bold; text-decoration: underline; text-align: center; padding-top: 15px; } .date-label{ float: left; padding: 0px 8px 0px 25px; } .from-label{ float: left; padding: 0px 12px 0px 15px; } .to-label{ float: left; padding: 0 30px 0px 15px; } .close-dx-calender{ text-align: center; background-color: dimgrey; cursor: pointer; } .open-dxcalender{ background-color: transparent; border: 0px; font-size: small; } input { background-color: transparent; border: 0px solid; height:20px; width: 90px; font-weight: bold; }  input:focus { background-color: black; color:white; font-weight: bold; } .date-container{ height:100px; } .date-container-predefined{ height:142px; } .button-pre-time{ background-color: #BFBFBF; margin-top: 4px; cursor: pointer } .predefined-list-container{ float: left; position: absolute; z-index:1000; left: calc(42% + 221px); width: 255px; background-color: #D9D9D9; top: calc(100%/2.5); } .button-predefined-cancel{ background-color: #BFBFBF; width: 100%; }"],
                 host: { '(window:keyup)': 'windowKeyUp($event)' }
             },] },
 ];
